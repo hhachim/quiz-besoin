@@ -1,5 +1,3 @@
-Je vais vous aider à formaliser le besoin pour votre API de quiz basée sur Spring REST. En m'inspirant du plan fourni et du fichier JDL, voici une analyse complète des besoins.
-
 # Formalisation des besoins pour l'API de Quiz
 
 ## 1. Vision du produit
@@ -25,10 +23,21 @@ L'API de quiz vise à fournir une plateforme flexible et performante permettant 
   * Association
   * Ordonnancement
   * Texte à trous
-- Configuration de limite de temps par question
 - Questions obligatoires/optionnelles
 - Ordonnancement des questions dans un quiz
-- Attribution de points spécifiques par question
+
+### Configuration de limite de temps par question dans un quiz:
+
+Chaque question possède une valeur de temps par défaut
+Cette valeur peut être personnalisée spécifiquement pour l'utilisation de la question dans un quiz particulier
+Cela permet de réutiliser les mêmes questions dans différents contextes (quiz rapides vs quiz détaillés)
+
+
+### Attribution de points spécifiques par question dans un quiz:
+
+Chaque question possède une valeur de points par défaut
+Cette valeur peut être personnalisée spécifiquement lors de l'intégration de la question dans un quiz particulier
+Permet d'ajuster la pondération des questions selon leur importance dans le contexte du quiz
 
 ### Participation aux quiz
 - Suivi des tentatives des utilisateurs
@@ -52,7 +61,7 @@ L'API de quiz vise à fournir une plateforme flexible et performante permettant 
 
 ### Sécurité
 - **Utilisation d'UUID** pour les identifiants publics plutôt que des ID séquentiels
-- Authentification OAuth2 comme spécifié dans le JDL
+- Authentification OAuth2
 - Autorisation fine basée sur les rôles et permissions
 - Protection contre les attaques classiques (CSRF, XSS, injection)
 - Journalisation des actions sensibles (audit trail)
@@ -80,7 +89,7 @@ L'API de quiz vise à fournir une plateforme flexible et performante permettant 
 
 ### Architecture
 
-En m'inspirant des bonnes pratiques et du JDL fourni, je propose une architecture modulaire:
+Je propose une architecture modulaire:
 
 1. **Core Module**:
    - Gestion des quiz, questions, réponses
@@ -108,8 +117,6 @@ En m'inspirant des bonnes pratiques et du JDL fourni, je propose une architectur
    - Configurations globales
 
 ### Modèle de données
-
-Le modèle de données suit celui défini dans le JDL avec quelques optimisations:
 
 - Utilisation d'UUID pour tous les identifiants externes (exposés via l'API)
 - Conservation des ID numériques en interne pour les performances
@@ -153,7 +160,7 @@ GET    /api/v1/stats/users/me              # Statistiques de l'utilisateur
 
 ### Sécurité et authentification
 
-- Implémentation OAuth2 comme spécifié dans le JDL
+- Implémentation OAuth2
 - Authentification via tokens JWT
 - Rafraîchissement automatique des tokens
 - Validation des permissions par annotation `@PreAuthorize`
